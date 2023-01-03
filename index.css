@@ -1,0 +1,19 @@
+img {
+    height: 90px;
+    width: 150px;
+}
+
+.cardContents {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 25px;
+    margin: 25px;
+    justify-content: space-between;
+}
+
+.coinCard {
+    border: 1px solid grey;
+    margin: 10px;
+    box-shadow: 2px 2px 2px;
+}
