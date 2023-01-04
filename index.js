@@ -1,6 +1,7 @@
-const coinsFlagsObject = { // Usado pra converter o nome de uma moeda em uma bandeira do pais que usa a moeda
+const TABLE_ITEMS = ['Compra', 'Venda', 'Variação',
+ 'Porcentagem de Variação', 'Máximo', 'Mínimo']; // Usado pra criar o cabeçalho da table
+const COINS_FLAGS = { // Usado pra converter o nome de uma moeda em uma bandeira do pais que usa a moeda
   'USD': 'https://countryflagsapi.com/png/usa',
-  'BRL': 'https://countryflagsapi.com/png/brazil',
   'CAD': 'https://countryflagsapi.com/png/can',
   'GBP': 'https://countryflagsapi.com/png/gbr',
   'ARS': 'https://countryflagsapi.com/png/arg',
@@ -27,23 +28,41 @@ async function fetchDataCoins() {
   }
 }
 
+function createDataTable() { // Cria o cabeçalho da tabela
+  const table = document.createElement('table');
+  const tableRow = document.createElement('tr');
+  TABLE_ITEMS.forEach((item) => {
+    const tableHead = document.createElement('th');
+    tableHead.innerHTML = item;
+    tableRow.appendChild(tableHead);
+    table.appendChild(tableRow);
+  });
+  return table;
+}
+
 function createCardElement(coins) {
-  const { bid, code, name } = coins[1];
+  const { bid, code } = coins[1];
+  const cardContents = document.createElement('div');
   const div = document.createElement('div');
   const coinName = document.createElement('h3');
   const coinFlag = document.createElement('img');
   const coinPrice = document.createElement('h5');
   coinPrice.innerText = `R$ ${bid}`;
+  cardContents.className = `cardContents`;
   div.className = 'coinCard';
+  coinFlag.className = 'coinFlagImg';
   coinName.innerHTML = coins[0];
 
-
-  coinFlag.setAttribute('crossOrigin', 'Anonymous');
-  coinFlag.src = coinsFlagsObject[coins[0]];
+  const table = createDataTable();
+  table.className = `table-${code}`
+  coinFlag.setAttribute('crossOrigin', '');
+  coinFlag.src = COINS_FLAGS[coins[0]];
   div.appendChild(coinName);
   div.appendChild(coinFlag);
   div.appendChild(coinPrice);
-  return div;
+  cardContents.appendChild(div);
+  cardContents.appendChild(table);
+  return cardContents;
 }
 
 async function createCoinCard() {
@@ -51,11 +70,58 @@ async function createCoinCard() {
   const mappedCoins = Object.entries(allCoins).map((arrCoin) => {
     if (arrCoin[0] === 'USDT') return '';
     const newDiv = createCardElement(arrCoin);
-    const getMain = document.querySelector('.cardContents');
+    const getMain = document.querySelector('#allCards');
     getMain.appendChild(newDiv);
     return newDiv;
   });
-  console.log(mappedCoins)
 }
 
-createCoinCard();
+function createTableValues(coins) {
+  const { ask, bid, code, high, low, pctChange, varBid} = coins[1];
+  const valuesArr = [bid, ask, varBid, pctChange, high, low];
+  const table = document.querySelector(`.table-${code}`);
+  const tableRow = document.createElement('tr');
+
+  valuesArr.forEach((value) => {
+    const tableData = document.createElement('td');
+    tableData.innerText = value;
+    tableRow.appendChild(tableData);
+    table.appendChild(tableRow);
+  })
+  console.log(table)
+}
+
+function tableStack() {
+
+}
+
+async function updateTableValues() { // Atualiza os valores na tabela e na card
+  const allCoins = await fetchDataCoins();
+  Object.entries(allCoins).forEach((arrCoin) => {
+    if (arrCoin[0] === 'USDT') return '';
+    createTableValues(arrCoin);
+  });
+}
+
+function runTable() {
+  updateTableValues();
+  setTimeout(runTable, 20000);
+}
+
+runTable();
+
+window.onload = async () => {
+  await createCoinCard();
+  createDataTable();
+  await updateTableValues();
+};
+
+// let run = true;
+// while(run) {
+//   try{
+
+//   }catch(err) {
+//     run = false;
+//     console.log(err);
+//   }
+// }
