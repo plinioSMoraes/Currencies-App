@@ -128,11 +128,8 @@ function runTable() {
   setTimeout(runTable, 5000);
 }
 
-// runTable();
-
 window.onload = async () => {
   await createCoinCard();
   createDataTable();
   runTable()
-  // await updateTableValues();
 };
