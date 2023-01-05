@@ -1,5 +1,5 @@
-const TABLE_ITEMS = ['Compra', 'Venda', 'Variação',
- 'Porcentagem de Variação', 'Máximo', 'Mínimo']; // Usado pra criar o cabeçalho da table
+const TABLE_ITEMS = ['Compra (R$)', 'Venda (R$)', 'Variação (R$)',
+ 'Porcentagem de Variação (R$)', 'Máximo (R$)', 'Mínimo (R$)']; // Usado pra criar o cabeçalho da table
 const COINS_FLAGS = { // Usado pra converter o nome de uma moeda em uma bandeira do pais que usa a moeda
   'USD': 'https://countryflagsapi.com/png/usa',
   'CAD': 'https://countryflagsapi.com/png/can',
@@ -48,8 +48,10 @@ function createCardElement(coins) {
   const coinName = document.createElement('h3');
   const coinFlag = document.createElement('img');
   const coinPrice = document.createElement('h5');
-  coinPrice.innerText = `R$ ${bid}`;
+  coinPrice.className = `priceTag-${code}`;
+  coinPrice.innerText = `R$ ${parseFloat(bid).toFixed(4)}`;
   cardContents.className = `cardContents`;
+  cardContents.id = `${code}-info`;
   div.className = 'coinCard';
   coinFlag.className = 'coinFlagImg';
   coinName.innerHTML = coins[0];
@@ -82,20 +84,18 @@ function createTableValues(coins) {
   const valuesArr = [bid, ask, varBid, pctChange, high, low];
   const table = document.querySelector(`.table-${code}`);
   const tableRow = document.createElement('tr');
-  deleteTableRow(code);
+  deleteTableRow(code); // Pra nao deixar a tabela ficar muito grande, deleta o elemento mais antigo da tabela
 
   valuesArr.forEach((value) => {
     const tableData = document.createElement('td');
-    tableData.innerText = value;
+    tableData.innerText = parseFloat(value).toFixed(4);
     tableRow.appendChild(tableData);
     table.appendChild(tableRow);
   })
-  // console.log(table)
 }
 
 function deleteTableRow(code) {
   const table = document.querySelector(`.table-${code}`);
-  // console.log(table.childNodes[1]);
   if (table.childNodes.length === 6) table.childNodes[1].remove();
 }
 
@@ -107,15 +107,32 @@ async function updateTableValues() { // Atualiza os valores na tabela e na card
   });
 }
 
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  let mybutton = document.getElementById("myBtn");
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+
 function runTable() {
   updateTableValues();
   setTimeout(runTable, 5000);
 }
 
-runTable();
+// runTable();
 
 window.onload = async () => {
   await createCoinCard();
   createDataTable();
-  await updateTableValues();
+  runTable()
+  // await updateTableValues();
 };
