@@ -17,4 +17,4 @@
 
 <p>Por fim, foi feito através do pacote surge, o deploy do site</p>
 
- <a href="https://desafiocess.surge.sh/" target="_blank">Deploy desáfio CESS</a>
+ <a href="https://desafiocess.surge.sh/">Deploy desáfio CESS</a>
