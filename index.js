@@ -88,7 +88,11 @@ function createTableValues(coins) {
 
   valuesArr.forEach((value) => {
     const tableData = document.createElement('td');
-    tableData.innerText = parseFloat(value).toFixed(4);
+    if (code === 'LTC' || 'BTC') {
+      tableData.innerText = parseFloat(value).toFixed(2); 
+    } else {
+      tableData.innerText = parseFloat(value).toFixed(4);
+    }
     tableRow.appendChild(tableData);
     table.appendChild(tableRow);
   })
