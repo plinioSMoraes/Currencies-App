@@ -1,19 +1,20 @@
+li a:hover {
+    background-color: #111;
+}
+
 body {
     margin: 0;
 }
 
-ul {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    background-color: #333;
+th,
+td {
+    border: 1px solid grey;
+    text-align: center;
 }
 
-li {
-    float: left;
+#allCard {
+    display: flex;
+    flex-direction: column;
 }
 
 li a {
@@ -26,52 +27,149 @@ li a {
     transition: 0.5s;
 }
 
-li a:hover {
-    background-color: #111;
+
+@media screen and (max-width: 700px) {
+
+    /*Mobile*/
+    ul {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        background-color: #333;
+    }
+
+    .cardContents {
+        display: flex;
+        flex-direction: row;
+    }
+
+
+    .cardContents {
+        margin-left: -80px;
+        color: antiquewhite;
+        transform: scaleX(0.65)
+    }
+
+    /* li a {
+        display: flex;
+        flex-direction: row;
+        color: rgb(149, 146, 146);
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    } */
+
+    .coinCard {
+        background-color: antiquewhite;
+        border: 1px solid grey;
+        margin: 10px;
+        width: 200px;
+        height: 200px;
+        box-shadow: 2px 2px 2px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .coinFlagImg {
+        height: 90px;
+        width: 150px;
+        border-radius: 100%;
+        position: sticky;
+        z-index: 0;
+    }
 }
 
-.coinFlagImg {
-    height: 90px;
-    width: 150px;
-    border-radius: 100%;
-    position: sticky;
-    z-index: 0;
-}
+@media screen and (min-width: 700px) {
 
-#allCards {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-}
+    /*Desktop*/
+    ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        background-color: #333;
+    }
 
-.cardContents {
-    display: flex;
-    flex-direction: row;
-}
 
-.coinCard {
-    background-color: antiquewhite;
-    border: 1px solid grey;
-    margin: 10px;
-    width: 200px;
-    height: 200px;
-    box-shadow: 2px 2px 2px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    li {
+        float: left;
+    }
 
-td {
-    border: 1px solid grey;
-    text-align: center;
-}
+    /* li a {
+        display: flex;
+        flex-direction: row;
+        color: rgb(149, 146, 146);
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        transition: 0.5s;
+    } */
 
-th {
-    border: 1px solid grey;
-    text-align: center;
+    .coinFlagImg {
+        height: 90px;
+        width: 150px;
+        border-radius: 100%;
+        position: sticky;
+        z-index: 0;
+    }
+
+    #allCards {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .cardContents {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .coinCard {
+        background-color: antiquewhite;
+        border: 1px solid grey;
+        margin: 10px;
+        width: 200px;
+        height: 200px;
+        box-shadow: 2px 2px 2px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* #myBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 30px;
+        z-index: 99;
+        border: none;
+        outline: none;
+        color: white;
+        cursor: pointer;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 18px;
+        transition: 0.5s;
+        opacity: 0.5;
+    }
+
+    #myBtn:hover {
+        opacity: 0.8;
+        background-color: #333;
+    } */
 }
 
 #myBtn {
@@ -92,7 +190,6 @@ th {
 }
 
 #myBtn:hover {
-    background-color: #555;
-    opacity: 1;
-
+    opacity: 0.8;
+    background-color: #333;
 }
