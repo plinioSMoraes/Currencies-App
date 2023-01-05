@@ -19,7 +19,7 @@ li {
 li a {
     display: flex;
     flex-direction: row;
-    color: rgb(161, 158, 158);
+    color: rgb(149, 146, 146);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
