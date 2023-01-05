@@ -28,9 +28,10 @@ async function fetchDataCoins() {
   }
 }
 
-function createDataTable() { // Cria o cabeçalho da tabela
+function createDataTable(code) { // Cria o cabeçalho da tabela
   const table = document.createElement('table');
   const tableRow = document.createElement('tr');
+  tableRow.className = `tableHeadings-${code}`;
   TABLE_ITEMS.forEach((item) => {
     const tableHead = document.createElement('th');
     tableHead.innerHTML = item;
@@ -53,7 +54,7 @@ function createCardElement(coins) {
   coinFlag.className = 'coinFlagImg';
   coinName.innerHTML = coins[0];
 
-  const table = createDataTable();
+  const table = createDataTable(code);
   table.className = `table-${code}`
   coinFlag.setAttribute('crossOrigin', '');
   coinFlag.src = COINS_FLAGS[coins[0]];
@@ -81,6 +82,7 @@ function createTableValues(coins) {
   const valuesArr = [bid, ask, varBid, pctChange, high, low];
   const table = document.querySelector(`.table-${code}`);
   const tableRow = document.createElement('tr');
+  deleteTableRow(code);
 
   valuesArr.forEach((value) => {
     const tableData = document.createElement('td');
@@ -88,11 +90,13 @@ function createTableValues(coins) {
     tableRow.appendChild(tableData);
     table.appendChild(tableRow);
   })
-  console.log(table)
+  // console.log(table)
 }
 
-function tableStack() {
-
+function deleteTableRow(code) {
+  const table = document.querySelector(`.table-${code}`);
+  // console.log(table.childNodes[1]);
+  if (table.childNodes.length === 6) table.childNodes[1].remove();
 }
 
 async function updateTableValues() { // Atualiza os valores na tabela e na card
@@ -105,7 +109,7 @@ async function updateTableValues() { // Atualiza os valores na tabela e na card
 
 function runTable() {
   updateTableValues();
-  setTimeout(runTable, 20000);
+  setTimeout(runTable, 5000);
 }
 
 runTable();
@@ -115,13 +119,3 @@ window.onload = async () => {
   createDataTable();
   await updateTableValues();
 };
-
-// let run = true;
-// while(run) {
-//   try{
-
-//   }catch(err) {
-//     run = false;
-//     console.log(err);
-//   }
-// }
