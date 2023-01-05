@@ -99,7 +99,7 @@ function deleteTableRow(code) {
   if (table.childNodes.length === 6) table.childNodes[1].remove();
 }
 
-async function updateTableValues() { // Atualiza os valores na tabela e na card
+async function updateTableValues() { // Atualiza os valores na tabela e na cards
   const allCoins = await fetchDataCoins();
   Object.entries(allCoins).forEach((arrCoin) => {
     if (arrCoin[0] === 'USDT') return '';

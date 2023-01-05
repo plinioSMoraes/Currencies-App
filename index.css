@@ -9,7 +9,6 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    /* overflow: hidden; */
     background-color: #333;
 }
 
@@ -20,7 +19,7 @@ li {
 li a {
     display: flex;
     flex-direction: row;
-    color: white;
+    color: rgb(161, 158, 158);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
