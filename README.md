@@ -1,5 +1,5 @@
-<h1> About </h1>
-<p> O projeto foi realizado para um teste prático de um estágio </p>
+<h1> Currencies App </h1>
+<h2> About </h2>
 <p> Para o site, foi utilizado js, html e css puros </p>
 
 <p> Foi utilizada a API https://economia.awesomeapi.com.br/json/all</p>
